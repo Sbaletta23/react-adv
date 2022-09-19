@@ -1,7 +1,9 @@
 
 
-export const LazyLoad3 = () => {
+const LazyLoad3 = () => {
     return (
-        <div>LazyLoad3</div>
+        <h1>LazyLoad3</h1>
     )
 }
+
+export default LazyLoad3;
