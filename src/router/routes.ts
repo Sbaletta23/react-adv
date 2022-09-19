@@ -1,7 +1,6 @@
 import { lazy, LazyExoticComponent } from 'react';
 // import { LazyLoad1, LazyLoad2, LazyLoad3 } from '../lazyload/pages';
 import { NoLazyLoad } from '../lazyload/pages/NoLazyLoad';
-import LazyLayout from '../lazyload/layout/LazyLayout';
 
 
 type JSXComponent = () => JSX.Element;
@@ -24,7 +23,7 @@ export const routes: Route[] = [
     {
         path: '/lazyload/*',
         to: '/lazyload/',
-        Component: LazyLayout,
+        Component: Lazy,
         name: 'LazyLayout - Dash'
     },
     {
