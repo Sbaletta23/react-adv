@@ -1,46 +1,31 @@
+import { createContext } from 'react';
 import { useProduct } from '../hooks/useProduct';
-
 import styles from '../styles/styles.module.css';
-import noImage from '../assets/no-image.jpg';
+import { ProductCardProps, ProductContextProps } from '../interface/interfaces';
 
-interface Props {
-    product: Product
-}
 
-interface Product {
-    id: string;
-    title: string;
-    img?: string;
-}
 
-export const ProductCard = ( { product }: Props ) => {
+// Context API, lo usamos para compartir info entre Padre e Hijos.
+export const ProductContext = createContext({} as ProductContextProps);
+const { Provider } = ProductContext;
 
+
+
+export const ProductCard = ({ children, product }: ProductCardProps) => {
     const { count, handleClick } = useProduct();
-    
+
     return (
-        <div className={styles.productCard}>
-            
-            <img className={styles.productImg} src={ product.img ? product.img : noImage } alt="Coffe Mug" />
+        <Provider value={{
+            count,
+            handleClick,
+            product
+        }}>
+                <div className={ styles.productCard }>
 
+                    {children}
+                    
+                </div>
 
-            <span className={styles.productDescription}>{ product.title}</span>
-
-            <div className={styles.buttonsContainer}>
-
-                <button 
-                    className={styles.buttonMinus}
-                    onClick={ () => handleClick(-1)} 
-                    > - </button>
-
-                <div className={styles.countLabel}>{ count }</div>
-
-                <button 
-                    className='styles.buttonAdd' 
-                    onClick={ () => handleClick(1) }
-                    > + </button>
-
-            </div>
-        </div>
-
+        </Provider>
     )
 }

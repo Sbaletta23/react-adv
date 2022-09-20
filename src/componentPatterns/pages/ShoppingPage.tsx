@@ -1,4 +1,4 @@
-import { ProductCard } from "../components/ProductCard";
+import {  ProductButtons, ProductCard, ProductImage, ProductTitle} from '../components';
 
 
 const data = {
@@ -7,21 +7,29 @@ const data = {
     img: './coffee-mug.png'
 }
 
+export const ShoppingPage = () => (
+    <div>
+        <h1>ShoppingPage</h1>
+        <hr />
+        <div style={{
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap'
+        }}>
 
-export const ShoppingPage = () => {
-    return (
-        <div>            
-            <h1>ShoppingPage</h1>
-            <hr />
+            {/* Compound Component Pattern - HOCs */}
+            <ProductCard product={ data }>
+                <ProductCard.Image />
+                <ProductCard.Title/>
+                <ProductCard.Buttons />
+            </ProductCard>
 
-            <div style={{
-                display: 'flex',
-                flexDirection: 'row',
-                flexWrap: 'wrap'
-            }}>
-                <ProductCard product={ data }/>
-            </div>
+            <ProductCard product={ data }>
+                <ProductImage/>
+                <ProductTitle title='Hello World' />
+                <ProductButtons/>
+            </ProductCard>
         </div>
-    )
-}
+    </div>
+)
 
