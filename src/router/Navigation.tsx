@@ -17,7 +17,7 @@ return (
                 <img src={logo} alt="logo" />
                 <ul>
                     <li>
-                        <NavLink to="/shopping" className={ ({isActive}) => isActive ? 'active' : '' } end >Shopping</NavLink>
+                        <NavLink to="/shopping" className={ ({isActive}) => isActive ? 'active' : '' } end >Shop</NavLink>
                     </li>
 
                     <li>

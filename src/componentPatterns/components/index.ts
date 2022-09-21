@@ -10,7 +10,6 @@ export { ProductImage } from './ProductImage';
 export { ProductTitle } from './ProductTitle';
 
 // Le asignamos a las props del HOC dichos Componentes
-
 export const ProductCard: ProductCardHOCProps = Object.assign( ProductCardHOC, {
     Title: ProductTitle,
     Image: ProductImage,
