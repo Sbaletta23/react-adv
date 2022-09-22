@@ -1,14 +1,41 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef} from 'react';
+import { Product, onChangeArgs } from '../interface/interfaces';
+
+
+
+export interface useProductArgs {
+    product: Product;
+    onChange?: (args: onChangeArgs) => void;
+    value?: number;
+}
+
 
 
 // Custom Hook - Maneja State de Product Card (Contador)
+export const useProduct = ( { onChange, product, value = 0 }: useProductArgs ) => {
 
-export const useProduct = () => {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(value);
+
+    
+    const isControlled = useRef( !!onChange);
+
 
     const handleClick = ( value: number ) => {
-        setCount( prev => Math.max(prev + value, 0))
-    } 
+        if( isControlled.current){
+            return onChange!({count: value, product})
+        }
+        const newValue= Math.max( count + value, 0)
+        setCount( newValue )
+
+        onChange && onChange({count: newValue, product});
+    }
+
+
+
+    useEffect(() => {
+      setCount(value)
+    }, [ value ]);
+    
 
     return {
         count,
