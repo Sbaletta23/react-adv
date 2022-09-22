@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef} from 'react';
+import { useState, useEffect} from 'react';
 import { Product, onChangeArgs } from '../interface/interfaces';
 
 
@@ -16,20 +16,14 @@ export const useProduct = ( { onChange, product, value = 0 }: useProductArgs ) =
 
     const [count, setCount] = useState(value);
 
-    
-    const isControlled = useRef( !!onChange);
-
 
     const handleClick = ( value: number ) => {
-        if( isControlled.current){
-            return onChange!({count: value, product})
-        }
+      
         const newValue= Math.max( count + value, 0)
         setCount( newValue )
 
         onChange && onChange({count: newValue, product});
     }
-
 
 
     useEffect(() => {
