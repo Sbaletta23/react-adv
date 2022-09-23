@@ -1,5 +1,5 @@
-import { useState, useEffect} from 'react';
-import { Product, onChangeArgs } from '../interface/interfaces';
+import { useState, useEffect, useRef} from 'react';
+import { Product, onChangeArgs, InitialValues } from '../interface/interfaces';
 
 
 
@@ -7,32 +7,48 @@ export interface useProductArgs {
     product: Product;
     onChange?: (args: onChangeArgs) => void;
     value?: number;
+    initialValues?: InitialValues;
 }
 
 
 
 // Custom Hook - Maneja State de Product Card (Contador)
-export const useProduct = ( { onChange, product, value = 0 }: useProductArgs ) => {
+export const useProduct = ( { onChange, product, value= 0 , initialValues}: useProductArgs ) => {
 
-    const [count, setCount] = useState(value);
+    const [count, setCount] = useState<number>(initialValues?.count || value);
+    const isMounted = useRef(false);
 
 
     const handleClick = ( value: number ) => {
       
-        const newValue= Math.max( count + value, 0)
-        setCount( newValue )
+        let newValue= Math.max( count + value, 0 )
+        if ( initialValues?.maxCount ) {
+            newValue = Math.min( newValue, initialValues.maxCount )
+        }
 
+        setCount( newValue )
         onChange && onChange({count: newValue, product});
     }
 
+    const reset = () => {
+        setCount(initialValues?.count || value )
+    }
 
     useEffect(() => {
-      setCount(value)
+        if( !isMounted.current ) return;
+        setCount(value)
     }, [ value ]);
+
+    useEffect(() => {
+      isMounted.current = true;
+    }, [])
     
 
     return {
         count,
-        handleClick
+        reset,
+        handleClick,
+        isMaxCountReached: !!initialValues?.count && initialValues.maxCount === count,
+        maxCount: initialValues?.maxCount,
     }
 }
