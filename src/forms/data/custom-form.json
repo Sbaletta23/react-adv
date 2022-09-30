@@ -1,0 +1,62 @@
+[
+    {
+        "type": "input",
+        "name": "firstName",
+        "placeholder": "Santiago",
+        "label": "First Name",
+        "value": "",
+        "validations": [
+            {
+                "type": "required"
+            },
+            {
+                "type": "minLength",
+                "value": 5
+            }
+        ]
+    },
+    {
+        "type": "input",
+        "name": "lastName",
+        "placeholder": "Barletta",
+        "label": "Last Name",
+        "value": "",
+        "validations": [
+            {
+                "type": "required"
+            }
+        ]
+    },
+    {
+        "type": "email",
+        "name": "email",
+        "placeholder": "Ingresar email",
+        "label": "Email",
+        "value": "",
+        "validations": [
+            {
+                "type": "required"
+            }
+        ]
+    },
+    {
+        "type": "select",
+        "name": "favoriteGame",
+        "label": "Favorite Game",
+        "value": "",
+        "options": [
+             {
+                "id": 1,
+                "label": "Superman"
+            },
+            {
+                "id": 2,
+                "label": "Batman"
+            },
+            {
+                "id": 3,
+                "label": "Spiderman"
+            }
+        ]
+    }
+]

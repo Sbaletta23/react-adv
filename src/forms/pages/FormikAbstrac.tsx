@@ -9,9 +9,6 @@ import '../styles/styles.css';
 
 
 export const FormikAbstrac = () => {
-
-
-
   return (
     <div>
         <h1>Formik Components</h1>
